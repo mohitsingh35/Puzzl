@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "374460127494",
+    "project_id": "logo-guessr",
+    "storage_bucket": "logo-guessr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374460127494:android:66665d4e30c87205d0e687",
+        "android_client_info": {
+          "package_name": "com.ncs.guessr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "374460127494-3u1qqahg5oh2k94o90f5jhinkfvqens0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAs2vd2PLYaqzZx4rvj3iyPahvnErv-cnc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "374460127494-3u1qqahg5oh2k94o90f5jhinkfvqens0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
