@@ -2,9 +2,7 @@ package com.ncs.guessr.ui.theme.UI
 
 
 import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearOutSlowInEasing
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -12,20 +10,14 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -41,29 +33,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.ncs.guessr.LevelData
+import coil.compose.AsyncImage
 import com.ncs.guessr.R
-import com.ncs.guessr.leveltypes
+import com.ncs.guessr.firebase.RealTimeModelResponse
 import com.ncs.guessr.ui.theme.EndScreen
 import com.ncs.guessr.ui.theme.zeroScoreScreen
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.sql.Wrapper
 
 @Composable
-fun LevelHosting(data:MutableList<LevelData>) {
+fun LevelHosting(data:  List<RealTimeModelResponse>,navController: NavController) {
     val context = LocalContext.current
     var updatedhelpCount by remember { mutableStateOf(getTextValue(context)) }
     var score by remember { mutableStateOf(0) }
     var isSettingDialogVisible by remember { mutableStateOf(false) }
     var levelcompleted by remember { mutableStateOf(false) }
     var ishelpDialogVisible by remember { mutableStateOf(false) }
-    var attemptCount by remember { mutableStateOf(0) }
     var currentIndex by remember { mutableStateOf(0) }
     var correctDialog by remember { mutableStateOf(false) }
     var wrongDialog by remember { mutableStateOf(false) }
@@ -73,14 +58,14 @@ fun LevelHosting(data:MutableList<LevelData>) {
             .fillMaxSize()
             .background(Color.Black)) {
             if (levelcompleted){
-                showendScreen(score = score)
+                showendScreen(score = score,navController)
             }
 
             LevelActionBar(onSettingsClicked = {isSettingDialogVisible=true}, onhelpClicked = {ishelpDialogVisible=true}, count = updatedhelpCount,score=score)
             Box(modifier = Modifier.fillMaxSize()) {
                 Column(modifier = Modifier.fillMaxSize(1f)) {
 
-                    ques_body(levelData = data[currentIndex]) { isCorrectAnswer ->
+                    ques_body(levelData = data[currentIndex].item!! ) { isCorrectAnswer ->
                         if (isCorrectAnswer) {
                             score += 10
                             correctDialog = true
@@ -89,24 +74,25 @@ fun LevelHosting(data:MutableList<LevelData>) {
                                 correctDialog = false
                                 if (currentIndex < data.size - 1) {
                                     currentIndex++
-                                    attemptCount = 0
                                 }
                                 else{
                                     currentIndex=data.size-1
                                     levelcompleted=true
                                 }
-                                attemptCount = 0
                             }
-                        } else if (attemptCount <1) {
-                            attemptCount++
+                        }  else {
                             wrongDialog = true
                             coroutineScope.launch {
                                 delay(2000)
                                 wrongDialog = false
+                                if (currentIndex < data.size - 1) {
+                                    currentIndex++
+                                }
+                                else{
+                                    currentIndex=data.size-1
+                                    levelcompleted=true
+                                }
                             }
-                        } else {
-                            currentIndex++
-                            attemptCount = 0
                         }
                     }
                     Box(modifier = Modifier.padding(start = 30.dp, top = 30.dp)) {
@@ -190,14 +176,19 @@ fun LevelHosting(data:MutableList<LevelData>) {
 
 
 @Composable
-fun ques_body(levelData: LevelData,onAnswerSelected: (Boolean) -> Unit) {
+fun ques_body(levelData: RealTimeModelResponse.RealTimeItems ,onAnswerSelected: (Boolean) -> Unit) {
     Column(
         modifier = Modifier
             .height(520.dp)
             .background(Color.Black)
     ) {
-        Box(modifier = Modifier.padding(start = 115.dp)) {
-            Image(painter = painterResource(levelData.logo), contentDescription = "logo", Modifier.size(150.dp))
+        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+//            Image(painter = painterResource(levelData.image), contentDescription = "logo", Modifier.size(150.dp))
+            AsyncImage(
+                model = levelData.image["url"].toString(),
+                contentDescription = null,
+                modifier = Modifier.size(90.dp)
+            )
 
         }
 
@@ -206,20 +197,25 @@ fun ques_body(levelData: LevelData,onAnswerSelected: (Boolean) -> Unit) {
             Column(modifier = Modifier.padding(start = 20.dp, end = 20.dp)) {
 
                 for (i in 0..3) {
-                    optionList(levelData, i,onAnswerSelected)
+                    optionList(levelData.options, i,onAnswerSelected, levelData)
                 }
             }
         }
     }
 }
 @Composable
-fun optionList(levelData: LevelData, i: Int,onAnswerSelected: (Boolean) -> Unit) {
-    val answer = levelData.answer
+fun optionList(
+    levelData: List<String?>,
+    i: Int,
+    onAnswerSelected: (Boolean) -> Unit,
+    levelData1: RealTimeModelResponse.RealTimeItems
+) {
+    val answer = levelData1.answer
     val coroutineScope = rememberCoroutineScope()
     var selectedOption by remember { mutableStateOf(-1) }
     val backgroundColor by animateColorAsState(
         targetValue = if (selectedOption == i) {
-            if (answer == levelData.options[i]) {
+            if (answer == levelData[i]) {
                 Color.Green
 
             } else {
@@ -244,7 +240,7 @@ fun optionList(levelData: LevelData, i: Int,onAnswerSelected: (Boolean) -> Unit)
                 selectedOption = i
                 coroutineScope.launch {
                     delay(200)
-                    onAnswerSelected(answer == levelData.options[i])
+                    onAnswerSelected(answer == levelData[i])
                     selectedOption = -1
                 }
             }
@@ -253,7 +249,7 @@ fun optionList(levelData: LevelData, i: Int,onAnswerSelected: (Boolean) -> Unit)
     ) {
         Row {
             Text(
-                text = levelData.options[i],
+                text = levelData[i]!!,
                 color = Color.Black,
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Medium
@@ -270,11 +266,11 @@ fun WrongDialog() {
     anim2()
 }
 @Composable
-fun showendScreen(score: Int) {
+fun showendScreen(score: Int,navController: NavController) {
     if (score > 0) {
-        EndScreen(score = score)
+        EndScreen(score = score,navController)
     } else {
-        zeroScoreScreen()
+        zeroScoreScreen(navController)
     }
 }
 

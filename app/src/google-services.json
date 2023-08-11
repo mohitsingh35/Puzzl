@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "223967910689",
+    "firebase_url": "https://logo-guessr-admin-default-rtdb.firebaseio.com",
+    "project_id": "logo-guessr-admin",
+    "storage_bucket": "logo-guessr-admin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223967910689:android:8c349c2e98598171f1bc60",
+        "android_client_info": {
+          "package_name": "com.ncs.guessr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "223967910689-iodkmasdkb831v1beiu232e2p7ab7a0g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHh-pX1_lLl5l6yw0TaSMs10L0QIaduPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "223967910689-iodkmasdkb831v1beiu232e2p7ab7a0g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:223967910689:android:693f50b6a3e134e2f1bc60",
+        "android_client_info": {
+          "package_name": "com.ncs.logoguessradmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "223967910689-iodkmasdkb831v1beiu232e2p7ab7a0g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHh-pX1_lLl5l6yw0TaSMs10L0QIaduPo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "223967910689-iodkmasdkb831v1beiu232e2p7ab7a0g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

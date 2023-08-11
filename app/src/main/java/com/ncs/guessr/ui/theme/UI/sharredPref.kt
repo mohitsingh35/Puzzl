@@ -15,5 +15,5 @@ fun saveTextValue(context: Context, value: Int) {
 
 fun getTextValue(context: Context): Int {
     val sharedPref = context.getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-    return sharedPref.getInt(KEY_TEXT_VALUE, 100) ?: 3
+    return sharedPref.getInt(KEY_TEXT_VALUE, 5) ?: 3
 }
