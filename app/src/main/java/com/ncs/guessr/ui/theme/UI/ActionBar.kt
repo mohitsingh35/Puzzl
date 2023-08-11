@@ -27,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -69,9 +70,8 @@ fun ActionBar(onSettingsClicked: () -> Unit,onhelpClicked: () -> Unit,count:Int)
                 }
                 Image(painter = painterResource(id = R.drawable.bulb), modifier = Modifier.size(45.dp), contentDescription = "null")
             }
-            Box(modifier = Modifier.padding(top = 10.dp)){
-                Text(text = "Guessr", fontWeight = FontWeight.Bold, color = Color.White, fontSize = 25.sp)
-
+            Box{
+                Image(painter = painterResource(id = R.drawable.logo), contentDescription = "null", modifier = Modifier.size(120.dp))
             }
             Box(modifier = Modifier.padding(top = 7.dp)){
                 Image(painter = painterResource(id = R.drawable.settings), contentDescription ="null", modifier = Modifier
