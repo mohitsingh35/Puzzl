@@ -1,4 +1,4 @@
-package com.ncs.guessr.ui.theme.UI
+package com.ncs.guessr.utils
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE

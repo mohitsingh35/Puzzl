@@ -1,18 +1,14 @@
-package com.ncs.guessr.ui.theme.UI
+package com.ncs.guessr.ui.theme.UI.Screens
 
 import android.util.Log
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.ncs.guessr.LevelData
-import com.ncs.guessr.common.CommonDialog
 import com.ncs.guessr.common.loadingscreen
-import com.ncs.guessr.firebase.RealTimeModelResponse
-import kotlinx.coroutines.CoroutineScope
+import com.ncs.guessr.viewmodels.NewbieViewModel
 
 @Composable
-fun newbieLevel(viewModel: NewbieViewModel = hiltViewModel(),navController: NavController) {
+fun newbieLevel(viewModel: NewbieViewModel = hiltViewModel(), navController: NavController) {
     val res = viewModel.res.value
     val serverData = res.item
     Log.d("mohitTest",serverData.toString())

@@ -1,4 +1,4 @@
-package com.ncs.guessr.ui.theme.UI
+package com.ncs.guessr.utils
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

@@ -1,4 +1,4 @@
-package com.ncs.guessr.ui.theme.UI
+package com.ncs.guessr.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,9 +6,7 @@ import android.content.SharedPreferences
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
-import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.core.content.edit
 

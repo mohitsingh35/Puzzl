@@ -1,4 +1,4 @@
-package com.ncs.guessr.ui.theme.UI
+package com.ncs.guessr.ui.theme.UI.Screens
 
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable

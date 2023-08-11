@@ -1,4 +1,4 @@
-package com.ncs.guessr.ui.theme.UI
+package com.ncs.guessr.ui.theme.UI.Screens
 
 
 import androidx.compose.animation.animateColorAsState
@@ -37,7 +37,16 @@ import coil.compose.AsyncImage
 import com.ncs.guessr.R
 import com.ncs.guessr.firebase.RealTimeModelResponse
 import com.ncs.guessr.ui.theme.EndScreen
+import com.ncs.guessr.ui.theme.UI.ActionBar.LevelActionBar
+import com.ncs.guessr.ui.theme.UI.Dialog.SettingsDialog
+import com.ncs.guessr.ui.theme.UI.Dialog.helpDialog
+import com.ncs.guessr.utils.anim
+import com.ncs.guessr.utils.anim2
+import com.ncs.guessr.utils.getTextValue
+import com.ncs.guessr.utils.saveTextValue
 import com.ncs.guessr.ui.theme.zeroScoreScreen
+import com.ncs.guessr.utils.correct
+import com.ncs.guessr.utils.wrong
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

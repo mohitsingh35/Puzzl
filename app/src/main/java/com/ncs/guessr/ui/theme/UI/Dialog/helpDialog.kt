@@ -1,4 +1,4 @@
-package com.ncs.guessr.ui.theme.UI
+package com.ncs.guessr.ui.theme.UI.Dialog
 
 import android.content.Context
 import androidx.compose.foundation.Image
@@ -14,8 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.FilledIconToggleButton
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,22 +23,25 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.ncs.guessr.R
+import com.ncs.guessr.utils.getTextValue
 
 @Composable
-fun SettingsDialog(
-    isSettingClicked: Boolean,
+fun helpDialog(
+    ishelpclicked: Boolean,
     onDismiss: () -> Unit,
     context: Context
 ) {
-    var allowVibrations by remember { mutableStateOf(getAllowVibrations(context)) }
+    var helpCount by remember { mutableStateOf(getTextValue(context)) }
 
-    if (isSettingClicked) {
+
+    if (ishelpclicked) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -53,7 +54,7 @@ fun SettingsDialog(
                         )
                     )
                 )
-                , contentAlignment = Alignment.Center
+            , contentAlignment = Alignment.Center
         ) {
 
             Box( modifier = Modifier
@@ -70,26 +71,19 @@ fun SettingsDialog(
                             .width(300.dp)
                             .clip(RoundedCornerShape(8.dp))
                             .background(Color.White)
-                            .padding(start = 40.dp, top = 70.dp, end = 20.dp)
+                            .padding(start = 30.dp, top = 50.dp, end = 20.dp)
                     ) {
 
                         Column {
-                            Row {
-                                Image(painter = painterResource(id = R.drawable.vibrate), contentDescription ="null",
-                                    Modifier
-                                        .size(80.dp)
-                                        .rotate(30F) )
-                                Spacer(modifier = Modifier.width(70.dp))
-                                Box (modifier = Modifier.padding(top=15.dp)){
-                                    Switch(
-                                        checked = allowVibrations,
-                                        onCheckedChange = { allowVibrations= it
-                                            setAllowVibrations(context, it)
-                                        }
-                                    )
+                            Box (modifier = Modifier.padding(start = 15.dp)){
+                                Row {
+                                    Text(text = "Available helps: ", color = Color.Black, fontSize = 22.sp)
+                                    Text(text = helpCount.toString(), color = Color.Black, fontSize = 22.sp)
+                                    Image(painter = painterResource(id = R.drawable.bulb), modifier = Modifier.size(25.dp), contentDescription = "null")
                                 }
-
                             }
+                            Spacer(modifier = Modifier.height(40.dp))
+                                Text(text = "Hey! \uD83D\uDC4B got stuck some where? \n\nUse the Skip button to skip the current level, but remember using a skip button once takes your 1 help. ", color = Color.Black, textAlign = TextAlign.Center)
 
                         }
                     }

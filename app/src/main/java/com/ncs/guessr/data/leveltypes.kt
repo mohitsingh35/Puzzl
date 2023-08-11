@@ -1,4 +1,4 @@
-package com.ncs.guessr
+package com.ncs.guessr.data
 
 import android.graphics.Color
 

@@ -1,4 +1,4 @@
-package com.ncs.guessr.ui.theme.UI
+package com.ncs.guessr.utils
 
 import com.ncs.guessr.firebase.RealTimeModelResponse
 

@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Share
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -34,7 +33,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.ncs.guessr.ui.theme.UI.endAnim
+import com.ncs.guessr.utils.endAnim
+import com.ncs.guessr.utils.zeroScore
 
 @Composable
 fun EndScreen(score:Int,navController: NavController){
@@ -130,7 +130,7 @@ fun zeroScoreScreen(navController: NavController){
             Box(modifier = Modifier
                 .size(300.dp)
                 .padding(start = 75.dp), contentAlignment = Alignment.Center) {
-                com.ncs.guessr.ui.theme.UI.zeroScore()
+                zeroScore()
             }
             Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                 Text(text = "Your Score was 0", color = Color.White, fontSize = 35.sp,fontWeight = FontWeight.ExtraBold)
